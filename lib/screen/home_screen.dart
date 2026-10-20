@@ -17,6 +17,9 @@ class HomeScreen extends StatefulWidget {
 
 // _HomeScreenState 정의
 class _HomeScreenState extends State<HomeScreen> {
+  // 페이지컨트롤러 생성
+  final PageController pageController = PageController();
+
   // initState() 함수 등록
   @override
   void initState() {
@@ -25,7 +28,24 @@ class _HomeScreenState extends State<HomeScreen> {
     Timer.periodic(   // Timer.periodic() 등록
       Duration(seconds: 3),
       (timer) {
-        print('Run!');
+        // 현재 페이지
+        int? nextPage = pageController.page?.toInt();
+
+        if (nextPage == null) {   // 페이지 값이 없을 때 예외 처리
+          return;
+        }
+
+        if (nextPage == 4) {   // 첫 페이지와 마지막 페이지 분기 처리
+          nextPage = 0;
+        } else {
+          nextPage++;
+        }
+
+        pageController.animateToPage(   // 페이지 변경
+          nextPage,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.ease,
+        );
       }
     );
   }
@@ -42,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       body: PageView(   // 페이지뷰 추가
+        controller: pageController,   // 페이지컨트롤러 등록
         children: [1, 2, 3, 4, 5].map(   // 샘플 리스트 생성 및 위젯으로 매핑
           (number) => Image.asset(
             'assets/img/image_$number.jpeg',
