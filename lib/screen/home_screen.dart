@@ -1,8 +1,34 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class HomeScreen extends StatelessWidget {
+// StatefulWidget 정의
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  // @override
+  // State<HomeScreen> createState() => _HomeScreenState();
+  @override
+  State<HomeScreen> createState() {
+    return _HomeScreenState();
+  }
+}
+
+// _HomeScreenState 정의
+class _HomeScreenState extends State<HomeScreen> {
+  // initState() 함수 등록
+  @override
+  void initState() {
+    super.initState();   // 부모 initState() 실행
+
+    Timer.periodic(   // Timer.periodic() 등록
+      Duration(seconds: 3),
+      (timer) {
+        print('Run!');
+      }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
