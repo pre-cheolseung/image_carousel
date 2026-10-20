@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();   // 부모 initState() 실행
 
     Timer.periodic(   // Timer.periodic() 등록
-      Duration(seconds: 3),
+      Duration(seconds: 3),   // 3초마다 콜백 실행
       (timer) {
         // 현재 페이지
         int? nextPage = pageController.page?.toInt();
@@ -41,10 +41,10 @@ class _HomeScreenState extends State<HomeScreen> {
           nextPage++;
         }
 
-        pageController.animateToPage(   // 페이지 변경
-          nextPage,
-          duration: Duration(milliseconds: 500),
-          curve: Curves.ease,
+        pageController.animateToPage(   // 부드럽게 페이지 변경
+          nextPage,   // 이동할 페이지
+          duration: Duration(milliseconds: 500),   // 페이지 이동 소요 시간 설정
+          curve: Curves.ease,   // 페이지 이동 애니메이션 방식 설정
         );
       }
     );
