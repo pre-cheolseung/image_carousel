@@ -17,34 +17,36 @@ class ImageSliderScreen extends StatefulWidget {
 class _ImageSliderScreenState extends State<ImageSliderScreen> {
   late final PageController _pageController;
   late final List<File> _fileList;
-  // 현재 가리키고 있는 페이지 인덱스 상태 관리
-  int _currentPage = 0;
+
+  int _currentPage = 0;   // 현재 가리키고 있는 페이지 인덱스 상태 관리
 
   // initState() 함수 등록
   @override
   void initState() {
     super.initState();   // 부모 initState() 실행
     _pageController = PageController(initialPage: 0);
-    // Map의 value(File)들만 추출하여 PageView에 사용할 List로 변환
-    _fileList = widget.imagesMap.values.toList();
+    _fileList = widget.imagesMap.values.toList();   // Map의 value(File)들만 추출하여 PageView에 사용할 List로 변환
 
-    Timer.periodic(   // Timer.periodic() 등록
+    // Timer.periodic() 등록
+    Timer.periodic(
       Duration(seconds: 3),   // 3초마다 콜백 실행
       (timer) {
-        // 현재 페이지
-        int? nextPage = _pageController.page?.toInt();
+        int? nextPage = _pageController.page?.toInt();   // 현재 페이지
         
-        if (nextPage == null) {   // 페이지 값이 없을 때 예외 처리
+        // 페이지 값이 없을 때 예외 처리
+        if (nextPage == null) {
           return;
         }
 
-        if (nextPage == 4) {   // 첫 페이지와 마지막 페이지 분기 처리
+        // 첫 페이지와 마지막 페이지 분기 처리
+        if (nextPage == 4) {
           nextPage = 0;
         } else {
           nextPage++;
         }
 
-        _pageController.animateToPage(   // 부드럽게 페이지 변경
+        // 페이지 부드럽게 변경
+        _pageController.animateToPage(
           nextPage,   // 이동할 페이지
           duration: Duration(milliseconds: 500),   // 페이지 이동 소요 시간 설정
           curve: Curves.ease,   // 페이지 이동 애니메이션 방식 설정
@@ -62,11 +64,10 @@ class _ImageSliderScreenState extends State<ImageSliderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // 상단 상태바 아이콘 색상 (밝게: light, 어둡게: dark)
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);   // 상단 상태바 아이콘 색상 (밝게: light, 어둡게: dark)
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.light,   // 상단 상태바 아이콘 색상 (밝게: light, 어둡게: dark)
       ),
     );
 
@@ -76,19 +77,18 @@ class _ImageSliderScreenState extends State<ImageSliderScreen> {
           : Stack(
             children: [
               // PageView를 통해 좌우 슬라이드로 이미지 노출
-              PageView.builder(   // PageView 추가
-                controller: _pageController,   // PageController 등록
+              PageView.builder(
+                controller: _pageController,   // _PageController 등록
                 itemCount: _fileList.length,
                 onPageChanged: (int page) {
                     setState(() {
-                      _currentPage = page; // 페이지 전환 시 인덱스 업데이트
+                      _currentPage = page;   // 페이지 전환 시 인덱스 업데이트
                     });
                   },
                 itemBuilder: (context, index) {
                   // 기기 내 로컬 파일이므로 Image.file을 사용하여 출력
                   return Image.file(
-                    // Map에서 인덱스(Key)에 해당하는 이미지 파일 가져오기
-                    _fileList[index],
+                    _fileList[index],   // Map에서 인덱스(Key)에 해당하는 이미지 파일 가져오기
                     fit: BoxFit.cover,   // BoxFit.cover 설정
                     width: double.infinity,
                     height: double.infinity,

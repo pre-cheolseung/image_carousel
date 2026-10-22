@@ -13,7 +13,7 @@ class AppName extends StatelessWidget {
     );
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,   // 글자 가운데 정렬
+      mainAxisAlignment: MainAxisAlignment.center,   // 가운데 정렬
       children: [
         Text(
           'IMAGE',

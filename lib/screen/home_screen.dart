@@ -10,14 +10,13 @@ import 'package:image_carousel/widget/logo.dart';
 
 import 'package:image_picker/image_picker.dart';
 
-// StatefulWidget 정의
 // 이미지를 다중 선택하여 Map에 저장하는 첫 번째 화면
+// StatefulWidget 정의
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);   // const 생성자 : 최초 선언 후 변경 불가능한 빌드 타임 함수
 
-  // @override
-  // State<HomeScreen> createState() => _HomeScreenState();
   @override
+  // State<HomeScreen> createState() => _HomeScreenState();
   State<HomeScreen> createState() {
     return _HomeScreenState();
   }
@@ -25,33 +24,34 @@ class HomeScreen extends StatefulWidget {
 
 // _HomeScreenState 정의
 class _HomeScreenState extends State<HomeScreen> {
-  // ImagePicker 객체 초기화
-  final ImagePicker _picker = ImagePicker();
-  // 선택한 이미지를 저장할 Map 객체 (Key: 파일명, Value: File 객체)
-  final Map<String, File> _selectedImagesMap = {};
+  final ImagePicker _picker = ImagePicker();   // ImagePicker 객체 초기화
+  final Map<String, File> _selectedImagesMap = {};   // 선택한 이미지를 저장할 Map 객체 (Key: 파일명, Value: File 객체)
 
   // // initState() 함수 등록
   // @override
   // void initState() {
   //   super.initState();   // 부모 initState() 실행
 
-  //   Timer.periodic(   // Timer.periodic() 등록
+  //   // Timer.periodic() 등록
+  //   Timer.periodic(
   //     Duration(seconds: 3),   // 3초마다 콜백 실행
   //     (timer) {
-  //       // 현재 페이지
-  //       int? nextPage = pageController.page?.toInt();
+  //       int? nextPage = pageController.page?.toInt();   // 현재 페이지
 
-  //       if (nextPage == null) {   // 페이지 값이 없을 때 예외 처리
+  //       // 페이지 값이 없을 때 예외 처리
+  //       if (nextPage == null) {
   //         return;
   //       }
 
-  //       if (nextPage == 4) {   // 첫 페이지와 마지막 페이지 분기 처리
+  //       // 첫 페이지와 마지막 페이지 분기 처리
+  //       if (nextPage == 4) {
   //         nextPage = 0;
   //       } else {
   //         nextPage++;
   //       }
 
-  //       pageController.animateToPage(   // 부드럽게 페이지 변경
+  //       // 페이지 부드럽게 변경
+  //       pageController.animateToPage(
   //         nextPage,   // 이동할 페이지
   //         duration: Duration(milliseconds: 500),   // 페이지 이동 소요 시간 설정
   //         curve: Curves.ease,   // 페이지 이동 애니메이션 방식 설정
@@ -62,16 +62,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // @override
   // Widget build(BuildContext context) {
-  //   // 상단 상태바 아이콘 색상 (밝게: light, 어둡게: dark)
-  //   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+  //   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);   // 상단 상태바 아이콘 색상 (밝게: light, 어둡게: dark)
   //   SystemChrome.setSystemUIOverlayStyle(
   //     const SystemUiOverlayStyle(
-  //       statusBarIconBrightness: Brightness.light,
+  //       statusBarIconBrightness: Brightness.light,   // 상단 상태바 아이콘 색상 (밝게: light, 어둡게: dark)
   //     ),
   //   );
 
   //   return Scaffold(
-  //     body: PageView(   // PageView 추가
+  //     // PageView를 통해 좌우 슬라이드로 이미지 노출
+  //     body: PageView(
   //       controller: pageController,   // PageController 등록
   //       children: [1, 2, 3, 4, 5].map(   // 샘플 리스트 생성 및 위젯으로 매핑
   //         (number) => Image.asset(
@@ -112,7 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,   // 위젯들 가운데 정렬
         children: [
-          Logo(   // 로고 이미지
+          // 로고 이미지
+          Logo(
             onTap: _pickImages,   // 로고를 탭 했을 때 실행할 함수
           ),
           SizedBox(
@@ -126,15 +127,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // 이미지 다중 선택 함수
   Future<void> _pickImages() async {
-    // 기기 내 갤러리에서 이미지 다중 선택
-    final List<XFile> images = await _picker.pickMultiImage(limit: 5);
+    final List<XFile> images = await _picker.pickMultiImage(limit: 5);   // 기기 내 갤러리에서 이미지 다중 선택
     
     if (images.isNotEmpty) {
       setState(() {
         _selectedImagesMap.clear();
         for (var xFile in images) {
-          // 파일명을 Key로, File 객체를 Value로 Map에 저장
-          _selectedImagesMap[xFile.name] = File(xFile.path);
+          _selectedImagesMap[xFile.name] = File(xFile.path);   // 파일명을 Key로, File 객체를 Value로 Map에 저장
         }
       });
 
