@@ -91,20 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  BoxDecoration getBoxDecoration() {
-    return BoxDecoration(
-      // 그라데이션 색상 적용
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [
-          Color(0xFF2A3A7C),
-          Color(0xFF000118),
-        ],
-      ),
-    );
-  }
-
   Widget entry() {
     return Container(
       decoration: getBoxDecoration(),
@@ -120,6 +106,20 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 30.0,
           ),
           AppName(),   // 앱 이름
+        ],
+      ),
+    );
+  }
+
+  BoxDecoration getBoxDecoration() {
+    return BoxDecoration(
+      // 그라데이션 색상 적용
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color(0xFF2A3A7C),
+          Color(0xFF000118),
         ],
       ),
     );
