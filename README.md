@@ -1,17 +1,25 @@
-# image_carousel
+# Digital Photo Frame
 
-A new Flutter project.
+Digital photo frame that automatically displays images in sequence.
 
-## Getting Started
+- Flutter 3.47.7
+- Dart 3.13.5
 
-This project is a starting point for a Flutter application.
+## Preparation
 
-A few resources to get you started if this is your first Flutter project:
+- Widget lifecycle
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Key Components
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- StatefulWidget
+- Image
+- PageView
+    - Controller
+- Timer
+- SystemChrome
+    - Top status bar and bottom navigation bar settings.
+
+## Additional Components
+
+- ImagePicker
+    - Load images stored on the device.
